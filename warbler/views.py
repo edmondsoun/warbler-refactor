@@ -1,6 +1,6 @@
 # Probably don't need top level views once blueprints is implemented.
 
-from . import app
+# from . import app
 
 # @app.route('/')
 # def index():

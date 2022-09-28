@@ -1,4 +1,4 @@
-
+from flask import render_template, g, session
 
 from .forms import (
    LoginForm, CSRFProtection, UserAddForm
@@ -6,7 +6,6 @@ from .forms import (
 from .models import (
     db, connect_db, User, Message, DEFAULT_IMAGE_URL, DEFAULT_HEADER_IMAGE_URL)
 
-from flask import render_template, g, session
 
 CURR_USER_KEY = "curr_user"
 

@@ -1,17 +1,16 @@
-"""SQLAlchemy models for Warbler."""
+"""SQLAlchemy models for Warbler users."""
 
 from datetime import datetime
 
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
+# from Follows import models
 
 bcrypt = Bcrypt()
 db = SQLAlchemy()
 
 DEFAULT_IMAGE_URL = "/static/images/default-pic.png"
 DEFAULT_HEADER_IMAGE_URL = "/static/images/warbler-hero.jpg"
-
-##SIGN UP /LOGIN part of users?
 
 
 class User(db.Model):
@@ -61,13 +60,13 @@ class User(db.Model):
 
     messages = db.relationship('Message', backref="user")
 
-    followers = db.relationship(
-        "User",
-        secondary="follows",
-        primaryjoin=(Follows.user_being_followed_id == id),
-        secondaryjoin=(Follows.user_following_id == id),
-        backref="following",
-    )
+    # followers = db.relationship(
+    #     "User",
+    #     secondary="follows",
+    #     primaryjoin=(Follows.user_being_followed_id == id),
+    #     secondaryjoin=(Follows.user_following_id == id),
+    #     backref="following",
+    # )
 
     liked_messages = db.relationship('Message', secondary="likes")
 
