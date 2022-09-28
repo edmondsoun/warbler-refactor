@@ -10,6 +10,9 @@ from sqlalchemy.exc import IntegrityError
 
 from ..__init__ import do_login, do_logout
 from ..messages.models import Message
+from ..user.models import User
+from ..follows.models import Follow
+from ..likes.models import Like
 
 CURR_USER_KEY = "curr_user"
 
