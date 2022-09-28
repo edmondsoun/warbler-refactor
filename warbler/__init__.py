@@ -17,6 +17,7 @@ from .models import (
 
 from .root import root
 from .users import users
+from .messages import messages
 
 load_dotenv()
 
@@ -71,7 +72,7 @@ def do_logout():
 
 # ROUTES:
 app.register_blueprint(root)
-app.register_blueprint(users)
+# app.register_blueprint(users)
 # app.register_blueprint(follows)
 # app.register_blueprint(messages)
 # app.register_blueprint(likes)

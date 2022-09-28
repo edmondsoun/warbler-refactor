@@ -34,13 +34,13 @@ class Message(db.Model):
         nullable=False,
     )
 
+def connect_db(app):
+    """Connect this database to provided Flask app.
 
-# def connect_db(app):
-#     """Connect this database to provided Flask app.
+    You should call this in your Flask app.
+    """
 
-#     You should call this in your Flask app.
-#     """
+    db.app = app
+    db.init_app(app)
 
-#     db.app = app
-#     db.init_app(app)
 

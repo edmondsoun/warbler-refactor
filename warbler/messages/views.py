@@ -1,38 +1,19 @@
-import os
-from dotenv import load_dotenv
 
 from flask import (
     Flask, render_template, request, flash, redirect, session, g, abort,
 )
-from flask_debugtoolbar import DebugToolbarExtension
-from sqlalchemy.exc import IntegrityError
 
-from forms import (
-    UserAddForm, UserEditForm, LoginForm, MessageForm, CSRFProtection,
+from .forms import (
+    MessageForm
 )
-from models import (
-    db, connect_db, User, Message, DEFAULT_IMAGE_URL, DEFAULT_HEADER_IMAGE_URL)
-
-load_dotenv()
-
-CURR_USER_KEY = "curr_user"
-
-app = Flask(__name__)
-
-# Get DB_URI from environ variable (useful for production/testing) or,
-# if not set there, use development local db.
-app.config['SQLALCHEMY_DATABASE_URI'] = (
-    os.environ['DATABASE_URL'].replace("postgres://", "postgresql://"))
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_ECHO'] = False
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
-app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
-toolbar = DebugToolbarExtension(app)
-
-connect_db(app)
+from .models import (
+    db, connect_db, Message)
 
 
-@app.post('/messages/<int:message_id>/like')
+from . import messages
+
+
+@messages.post('/messages/<int:message_id>/like')
 def toggle_like(message_id):
     """Toggle a liked message for the currently-logged-in user.
 
@@ -59,7 +40,7 @@ def toggle_like(message_id):
     return redirect("/")
 
 
-@app.route('/messages/new', methods=["GET", "POST"])
+@messages.route('/messages/new', methods=["GET", "POST"])
 def add_message():
     """Add a message:
 
@@ -82,7 +63,7 @@ def add_message():
     return render_template('messages/create.html', form=form)
 
 
-@app.get('/messages/<int:message_id>')
+@messages.get('/messages/<int:message_id>')
 def show_message(message_id):
     """Show a message."""
 
@@ -94,7 +75,7 @@ def show_message(message_id):
     return render_template('messages/show.html', message=msg)
 
 
-@app.post('/messages/<int:message_id>/delete')
+@messages.post('/messages/<int:message_id>/delete')
 def delete_message(message_id):
     """Delete a message.
 
