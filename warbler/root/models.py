@@ -1,4 +1,4 @@
-"""SQLAlchemy models for Warbler."""
+"""SQLAlchemy models for Warbler root."""
 
 from datetime import datetime
 
