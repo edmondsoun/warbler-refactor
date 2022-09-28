@@ -12,7 +12,6 @@ DEFAULT_IMAGE_URL = "/static/images/default-pic.png"
 DEFAULT_HEADER_IMAGE_URL = "/static/images/warbler-hero.jpg"
 
 
-
 class User(db.Model):
     """User in the system."""
 
